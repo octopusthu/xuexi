@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="lang=zh-cmn-Hans">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+<meta name="description" content="“学习强国”学习平台由中宣部主管，以深入学习宣传习近平新时代中国特色社会主义思想为主要内容，建立纵向到底、横向到边学习网络，实现有组织、有指导、有管理、有服务学习，打造集大成创新学习生态。">
+<title>内容详情</title>
+<link rel="stylesheet" href="https://source.xuexi.cn/css/page.min.css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="https://source.xuexi.cn/script/verify/css/verify.css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="https://source.xuexi.cn/css/common.css" media="screen" title="no title" charset="utf-8">
+<script src="https://source.xuexi.cn/vue/1.0.28/vue.min.js"></script>
+<script src="https://source.xuexi.cn/script/json3.min.js"></script>
+<script src="https://source.xuexi.cn/script/libs.js?v=1552061694"></script>
+<script src="https://source.xuexi.cn/script/jquery/2.2.4/jquery.min.js"></script>
+<script>
+    if (lessIE9()) {
+      location.href = '/update';
+    }
+  </script>
+<!--[if IE 9]>
+    <style> 
+    select { background: url("https://source.xuexi.cn/images/arrow.png") no-repeat scroll right 15px center transparent !important; } 
+    #modal { display: none !important; }
+    </style>
+  <![endif]-->
+<style>
+    * {
+        text-decoration: none;
+        padding: 0;
+        border-width: 0;
+        margin: 0;
+        border-collapse: collapse;
+      }
+    html,
+    body {
+      height: 100%;
+      text-align: center;
+      background: #fff;
+    }
+    body>* {
+      text-align: left;
+    }
+    [v-cloak] {
+      visibility: hidden;
+    }
+    #popup{
+       position:fixed; 
+       width: 100%;
+       height: 100%; 
+       top: 0;
+       right:0;
+       background: #cccccc;
+       z-index:100000;
+       display:none
+    }
+    #canvas{
+       width:140px;
+       height:140px;
+       display:none;
+    }
+    #popup img{
+       background:#ffffff;
+       width:40px;
+       border-radius:25px;
+       margin: 30px 30px;
+    }
+    #popup-ch{
+       position: absolute;
+       left: 50%;
+       top: 50%;
+       transform: translate(-50%,-50%);
+       background:#FFFFFF;
+       width:100px;
+       height:100px;
+    }
+    #app {
+      min-width: 1250px;
+    }
+    #modal {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10000;
+      display: none;
+    }
+    #alertBox {
+      position: fixed;
+      width: 350px;
+      height: 200px;
+      background: rgb(255, 255, 255);
+      border: 1px solid rgb(242, 243, 243);
+      left: 50%;
+      top: 40%;
+      border-radius: 10px;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      box-shadow: rgba(125, 114, 114, 0.5) 0px 5px 15px;
+    }
+    #title {
+      text-align: center;
+      line-height: 50px;
+      padding-left: 20px;
+      height: 50px;
+      font-size: 18px;
+      color: rgb(61, 139, 255);
+      border-bottom: 1px solid rgb(242, 243, 243);
+    }
+    #close {
+      width: 25px;
+      height: 25px;
+      margin-top: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+      float: right;
+    }
+    .global-image {
+      cursor: pointer;
+    }
+    #content {
+      margin: 30px 40px 20px;
+      font-size: 14px;
+      color: rgb(128, 128, 128);
+      height: 40px;
+      overflow: hidden;
+    }
+    #certain {
+      position: relative;
+    }
+    #btn {
+      height: 36px;
+      background: rgb(61, 139, 255);
+      border-radius: 18px;
+      width: 120px;
+      font-size: 13px;
+      cursor: pointer;
+      color: rgb(255, 255, 255);
+      bottom: 40px;
+      outline: none;
+    }
+    #certain :active {
+      border: 3px solid #0f65ff;
+    }
+    .header {
+      height: 460px;
+      position: relative;
+    }
+    .header-screen {
+      width: 100%;
+      
+    }
+    .header-page {
+      position: relative;
+      width: 900px;
+      margin: 0 auto;
+      
+    }
+    .content {
+      position: relative;
+      min-height: 1000px;
+       
+      
+      z-index: 0;
+    }
+    .page {
+      position: relative;
+      width: 900px;
+      margin: 0 auto;
+      
+    }
+    .screen {
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      
+    }
+    .footer {
+      position: relative;
+      height: 0px;
+    }
+    .footer-screen {
+      width: 100%;
+      
+    }
+    .footer-page {
+      position: relative;
+      width: 900px;
+      margin: 0 auto;
+      
+    }
+    .image-shadow { 
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      top: 0;
+      bottom: 0;
+      z-index: 1000;
+      display:none;
+    }
+    .image-shadow .image-container { 
+      width: 90%;
+      height: 90%;
+      margin: 2% auto;
+      background-position: center center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+    
+  </style>
+</head>
+<input id="csrf_token" type="hidden" value="nhrhpjdza8">
+<script>
+  var csrf_token = "nhrhpjdza8";
+  localStorage.setItem('csrf_token', csrf_token);
+  localStorage.setItem('oauth', "oauth");
+</script>
+<body id="app" v-cloak style="width:100%;height:100%">
+<div style="display:none">“学习强国”学习平台由中宣部主管，以深入学习宣传习近平新时代中国特色社会主义思想为主要内容，建立纵向到底、横向到边学习网络，实现有组织、有指导、有管理、有服务学习，打造集大成创新学习生态。</div>
+<div id="modal">
+<div id="alertBox">
+<div id="title">
+学习强国
+<img src="https://source.xuexi.cn/images/ios-close-outline.png" id="close" onclick="closeFunc()">
+</div>
+<div id="content"></div>
+<div id="certain">
+<input id="btn" type="button" value="确 定" onclick="certainFunc()">
+</div>
+</div>
+</div>
+<div id="popup">
+<div id="popup-ch">
+<canvas id="canvas"></canvas>
+<img src="https://source.xuexi.cn/images/loading.gif">
+</div>
+</div>
+<div class="header">
+<div class="header-screen">
+<div id="Cdcw8v5jwzdc00" class="iframe_wrap_dcw8v5jwzdc00" style="width:100%;height:460px;left:0;top:0px;color:#111;border:none;box-sizing:border-box;border-color:#ddd;line-height:40px;font-size:14px;text-align:left;position:absolute;box-sizing: border-box;">
+<iframe sanbox="allow-scripts allow-top-navigation" src="https://www.xuexi.cn/b0b2a39e854d4612c6858aea76861d98/648fafc83297345be269377aefc53c9e.html" scrolling="no" frameborder="0" style="width:  100%; height:  100%;"></iframe>
+</div>
+</div>
+<div class="header-page">
+<style>
+
+.word-item:hover {
+    color: #d30000 !important;
+  }
+  
+    #Cdcw8v5jwzdc00{
+    overflow: hidden;
+  }
+
+</style>
+</div>
+</div>
+<div class="content">
+<div class="screen">
+<style> #Caidz9d8qxww00 { width:100%;left:0;top:0px;overflow:visible;border:none;display:flex;align-items:center;flex-direction:column;-js-display:flex;box-sizing:border-box;border-color:#000;font-family:Microsoft Yahei, 微软雅黑;min-height:1000px;position:absolute;box-sizing: border-box; } </style>
+<div id="Caidz9d8qxww00" control='div'>
+<style> #Ci7bbmumaq5s00 { overflow:visible;width:1000px;border:none;display:flex;flex-direction:row;-js-display:flex;margin-bottom:20px;margin-top:20px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="Ci7bbmumaq5s00" v-if="complexExpression_i7bbmumaq5s00()" control='div'><div id="Cc0aw9v0cv8000" style="overflow:hidden;color:#666666;border:none;text-decoration:none;text-align:left;font-size:14px;line-height:20px;border-color:#000;box-sizing:border-box;cursor:pointer;box-sizing: border-box;" control='text' @click="click_c0aw9v0cv8000" title="">{{innerText_c0aw9v0cv8000}}</div><div id="C5rd0wu0ng0s00" style="overflow:hidden;color:#666666;border:none;text-decoration:none;text-align:left;font-size:14px;line-height:20px;margin-left:5px;margin-right:5px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{innerText_5rd0wu0ng0s00}}</div><div id="Ch08rembqqkw00" style="overflow:hidden;color:#666666;border:none;text-decoration:none;text-align:left;font-size:14px;line-height:20px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{innerText_h08rembqqkw00}}</div>
+</div>
+<style> #C20eahza03f7k0 { width:1000px;overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;min-height:800px;box-sizing: border-box; } </style>
+<div id="C20eahza03f7k0" control='div'>
+<style> #Cazfcspy51kg00 { overflow:visible;width:1000px;border:none;display:flex;flex-direction:column;-js-display:flex;border-color:#000;box-sizing:border-box;min-height:800px;box-sizing: border-box; } </style>
+<div id="Cazfcspy51kg00" v-if="complexExpression_azfcspy51kg00()" control='div'>
+<style> #C9can8xfbz5000 { width:100%;overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;z-index:200;-js-display:flex;box-sizing:border-box;border-color:#000;margin-top:20px;margin-bottom:20px;box-sizing: border-box; } </style>
+<div id="C9can8xfbz5000" control='div'><div id="Cfgv6ykmyi0g00" style="height:40px;color:#111;overflow:hidden;border:none;background-color:#fff;box-sizing:border-box;border-color:#000;line-height:40px;font-size:20px;text-align:center;text-decoration:none;font-family:Microsoft Yahei, 微软雅黑;box-sizing: border-box;" control='text' title="">{{innerText_fgv6ykmyi0g00}}</div>
+</div>
+<style> #Cg5ynl8w174w00 { overflow:visible;width:100%;border:none;display:flex;flex-direction:row;justify-content:center;-js-display:flex;margin-bottom:20px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="Cg5ynl8w174w00" control='div'>
+<div id="Cd1smadng91s00" style="overflow:hidden;color:#333;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:center;font-size:38px;line-height:50px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" v-html="innerText_d1smadng91s00" control='text' title=""></div>
+</div>
+<style> #C7tf2p49la5w00 { overflow:visible;width:100%;border:none;display:flex;flex-direction:row;justify-content:center;-js-display:flex;margin-bottom:30px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C7tf2p49la5w00" control='div'><div id="Cf2a8ri551ag00" style="overflow:hidden;color:#333;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:center;font-size:20px;line-height:40px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{innerText_f2a8ri551ag00}}</div>
+</div>
+<style> #Cj3phq9tik1c00 { overflow:visible;width:100%;display:flex;flex-direction:row;justify-content:center;-js-display:flex;border-bottom-width:1px;margin-bottom:048px;border-style:solid;border-color:#e7d6c3;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="Cj3phq9tik1c00" control='div'>
+<style> #C4d7toknpd4w00 { overflow:visible;border:none;flex:1;flex-grow:1;flex-shrink:1;flex-basis:0;display:flex;align-items:center;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="C4d7toknpd4w00" control='div'>
+<style> #Cizr7msuptew00 { overflow:visible;border:none;display:flex;align-items:center;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;padding-top:10px;padding-right:10px;padding-bottom:10px;box-sizing: border-box; } </style>
+<div id="Cizr7msuptew00" v-if="complexExpression_izr7msuptew00()" control='div'><div id="Cc9ofpppazmo00" style="overflow:hidden;color:#666;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:center;font-size:14px;line-height:30px;margin-right:20px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{interceptingFirstSpace_c9ofpppazmo00(innerText_c9ofpppazmo00)}}</div>
+</div>
+<style> #C1jjyzz2jam0w0 { overflow:visible;border:none;display:flex;align-items:center;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;box-sizing: border-box; } </style>
+<div id="C1jjyzz2jam0w0" control='div'><div id="C4hjj8kfm02g00" style="overflow:hidden;color:#666;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:right;font-size:14px;line-height:30px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" v-if="complexExpression_4hjj8kfm02g00()" control='text' title="">{{innerText_4hjj8kfm02g00}}</div><div id="Cha89ig3ffdc00" style="overflow:hidden;color:#666;border:none;font-family:SimSun;text-decoration:none;text-align:center;font-size:14px;line-height:30px;border-color:#000;box-sizing:border-box;cursor:pointer;box-sizing: border-box;" control='text' @click="flow_method_4b2yudi6opw00({}, $event)" title="">{{innerText_ha89ig3ffdc00}}</div>
+</div>
+<style> #Cflpk1gnnax400 { overflow:visible;border:none;display:flex;flex-direction:row;align-items:center;-js-display:flex;padding-left:10px;padding-bottom:10px;padding-right:10px;padding-top:10px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="Cflpk1gnnax400" control='div'><div id="C3xtovi0qp2i00" style="overflow:hidden;color:#666;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:right;font-size:14px;line-height:30px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" v-if="complexExpression_3xtovi0qp2i00()" control='text' title="">{{innerText_3xtovi0qp2i00}}</div><div id="C633ojvpp7jo00" style="overflow:hidden;color:#666;border:none;font-family:SimSun;text-decoration:none;text-align:center;font-size:14px;line-height:30px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{innerText_633ojvpp7jo00}}</div>
+</div>
+<style> #Ccwsrao7zwpk00 { overflow:visible;border:none;display:flex;flex-direction:row;align-items:center;-js-display:flex;padding-left:10px;padding-bottom:10px;padding-right:10px;padding-top:10px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="Ccwsrao7zwpk00" v-if="complexExpression_cwsrao7zwpk00()" control='div'><div id="C3a1ln4zijzo00" style="overflow:hidden;color:#666;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:right;font-size:14px;line-height:30px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{innerText_3a1ln4zijzo00}}</div><div id="Cjg3ccj9ggjc00" style="overflow:hidden;color:#666;border:none;font-family:SimSun;text-decoration:none;text-align:center;font-size:14px;line-height:30px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{innerText_jg3ccj9ggjc00}}</div>
+</div>
+</div>
+<style> #C1j3k7po0k0w00 { overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;align-items:center;-js-display:flex;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C1j3k7po0k0w00" v-if="complexExpression_1j3k7po0k0w00()" control='div'>
+<style> #C7147vdl8o9g00 { overflow:visible;height:32px;width:90px;display:flex;flex-direction:row;justify-content:center;align-items:center;-js-display:flex;border-left-width:1px;border-right-width:1px;border-bottom-width:1px;border-top-width:1px;border-style:solid;border-color:#666;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C7147vdl8o9g00" v-if="false" control='div'><div id="C7k0ksj9idio00" style="overflow:hidden;color:#666;border:none;font-family:SimSun;text-decoration:none;text-align:left;font-size:14px;line-height:14px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{innerText_7k0ksj9idio00}}</div>
+</div>
+</div>
+<style> #C1tsd45fzqwqo0 { overflow:visible;border:none;display:flex;align-items:center;flex-direction:row;justify-content:center;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="C1tsd45fzqwqo0" control='div'>
+<style> #Cf6a2zibh3i000 { overflow:visible;height:31px;border:none;display:flex;flex-direction:row;justify-content:flex-end;align-items:center;z-index:2;-js-display:flex;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="Cf6a2zibh3i000" v-if="false" control='div'><div id="C95xvpvvcqkw00" style="height:15px;width:15px;margin-right:5px;box-sizing:border-box;box-sizing: border-box;" :style="{'background-image':'url(' + getSrc_95xvpvvcqkw00(src_95xvpvvcqkw00,1,15,15) + ')'}" class="background-img-stretching " control='img'></div><div id="Cexszbrdzbfk00" style="height:30px;color:#666666;overflow:hidden;border:none;background-color:#fff;box-sizing:border-box;line-height:30px;font-size:14px;text-align:center;text-decoration:none;box-sizing: border-box;" control='text' title="">{{innerText_exszbrdzbfk00}}</div>
+</div>
+<style> #C6e45w7g6wug00 { overflow:visible;height:31px;border:none;display:flex;flex-direction:row;justify-content:flex-end;align-items:center;-js-display:flex;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C6e45w7g6wug00" v-if="false" control='div'><div id="Ck30tro47m8g00" style="height:15px;width:15px;box-sizing:border-box;box-sizing: border-box;" :style="{'background-image':'url(' + getSrc_k30tro47m8g00(src_k30tro47m8g00,1,15,15) + ')'}" class="background-img-stretching " control='img'></div><div id="C1yevlqmz87nk0" style="width:40px;height:30px;color:#666666;overflow:hidden;border:none;background-color:#fff;box-sizing:border-box;line-height:30px;font-size:14px;text-align:center;text-decoration:none;box-sizing: border-box;" control='text' title="">{{innerText_1yevlqmz87nk0}}</div>
+</div>
+<style> #Chijcjujovso00 { overflow:visible;height:31px;border:none;display:flex;flex-direction:row;justify-content:flex-end;-js-display:flex;border-color:#000;box-sizing:border-box;cursor:pointer;box-sizing: border-box; } </style>
+<div id="Chijcjujovso00" control='div' @click="flow_method_g0xkady584o00({}, $event)"><div id="Cbminy3pi7uo00" style="height:30px;width:30px;box-sizing:border-box;box-sizing: border-box;" :style="{'background-image':'url(' + getSrc_bminy3pi7uo00(src_bminy3pi7uo00,1,30,30) + ')'}" class="background-img-stretching " control='img'></div><div id="Ckqjia9xdv0w00" style="width:40px;height:30px;color:#666666;overflow:hidden;border:none;background-color:#fff;box-sizing:border-box;line-height:30px;font-size:14px;text-align:center;text-decoration:none;box-sizing: border-box;" control='text' title="">{{innerText_kqjia9xdv0w00}}</div>
+</div>
+</div>
+</div>
+<style> #C49ekrbi6xk600 { overflow:visible;height:40px;border:none;display:flex;flex-direction:row;-js-display:flex;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C49ekrbi6xk600" v-if="complexExpression_49ekrbi6xk600()" control='div'>
+<style> #C46rhh0du3p20 { overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C46rhh0du3p20" control='div'><div id="Cghu8guz912o00" style="overflow:hidden;color:#666;border:none;z-index:200;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:left;font-size:14px;line-height:30px;border-color:#000;box-sizing:border-box;background-color:#fff;box-sizing: border-box;" control='text' title="">{{innerText_ghu8guz912o00}}</div><div id="Cb8hyduure6g00" style="height:30px;color:rgba(61,72,219,1);overflow:hidden;border:none;z-index:200;background-color:#fff;box-sizing:border-box;border-color:#000;margin-bottom:10px;line-height:30px;font-size:14px;text-align:left;text-decoration:none;font-family:Microsoft Yahei, 微软雅黑;cursor:pointer;box-sizing: border-box;" control='text' @click="flow_method_a8heiaug0s800({}, $event)" title="">{{innerText_b8hyduure6g00}}</div>
+</div>
+</div>
+<style> #C6nna7bwlql000 { overflow:visible;width:100%;border:none;display:flex;flex-direction:column;align-items:center;-js-display:flex;margin-bottom:20px;margin-top:20px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C6nna7bwlql000" v-if="complexExpression_6nna7bwlql000()" control='div'><link href="https://source.xuexi.cn/script/de/prismplayer/2.8.1/skins/default/aliplayer-min.css" rel="stylesheet">
+<style>
+      .prism-player .prism-volume .volume-control,
+      .prism-speed-selector .speed-selector-list,
+      .prism-stream-selector .stream-selector-list{
+        bottom: 35px;
+      }
+    </style>
+<div style="width:900px;height:500px;color:#111;overflow:hidden;border:none;box-sizing:border-box;border-color:#000;font-size:14px;box-sizing: border-box;" class="prism-player" id="J_prismPlayer_7xkoogw8v1o00"></div>
+</div>
+<style> #C2dvg1ktqvqzo0 { width:100%;overflow:visible;border:none;display:flex;align-items:center;flex-direction:row;justify-content:center;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="C2dvg1ktqvqzo0" control='div'>
+<style> #C26qbfxs7jw680 { overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;align-items:center;-js-display:flex;margin-bottom:20px;margin-top:5px;padding-left:20px;padding-right:20px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C26qbfxs7jw680" v-if="complexExpression_26qbfxs7jw680()" control='div'>
+<style> #Cnxma2ljwmls0 { overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="Cnxma2ljwmls0" control='div'><div id="C6kmcdrm9ut800" style="width:77px;height:25px;box-sizing:border-box;margin-right:10px;box-sizing: border-box;" :style="{'background-image':'url(' + getSrc_6kmcdrm9ut800(src_6kmcdrm9ut800,1,77,25) + ')'}" class="background-repeat-img " v-if="false" control='img'></div>
+</div><audio class="audio_4prmy8nsvyg00" id="C4prmy8nsvyg00" oncontextmenu="return false" controlsList="nodownload" style="visibility:visible;overflow:hidden;color:#111;width:800px;border:none;font-size:14px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" :src="getSrc_4prmy8nsvyg00(src_4prmy8nsvyg00)" :poster="poster_4prmy8nsvyg00" controls='controls' autoplay control='audio'>您的浏览器不支持 audio 标签。</audio>
+</div>
+</div>
+<style> #Cl3caikxy44w00 { overflow:visible;width:100%;border:none;display:flex;flex-direction:row;-js-display:flex;margin-bottom:30px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="Cl3caikxy44w00" control='div'><style> #C63d493x62hc00 img { max-width: 1000px !important; width: auto !important; display:block !important; margin:0 auto !important;height:auto !important; } </style><style>#C63d493x62hc00 .hugo-image .caption > [data-node-type="Paragraph"] { color: #949699 !important; font-size: 15.75px !important; text-align:center !important;}</style>
+<div id="C63d493x62hc00" class="dyxx-rich-content" style="overflow:hidden;color:#333;width:100%;border:none;text-indent:2em;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:left;font-size:18px;font-weight:400;line-height:34px;padding-left:10px;padding-right:10px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" v-html="innerText_63d493x62hc00" control='text' title=""></div>
+</div>
+<style> #C35de3srtoq800 { width:100%;overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;-js-display:flex;box-sizing:border-box;border-color:#000;margin-bottom:30px;box-sizing: border-box; } </style>
+<div id="C35de3srtoq800" v-if="complexExpression_35de3srtoq800()" control='div'>
+<style>
+
+.pagination .current {
+    background: #ca1c1d;
+    color: #fff;
+    border: 1px solid #ca1c1d;
+}
+
+</style>
+<div id="C4lcfd0jget800" style="width:660px;height:35px;color:#111;box-sizing:border-box;border-color:#D3D4D5;border-style:solid;line-height:50px;text-align:center;border-width:1;font-size:14px;cursor:pointer;box-sizing: border-box;" control='pagination'>
+<div>
+<ul class="pagination">
+<li class="{{item.status}}" v-for="item in list_4lcfd0jget800" @click="page_action_4lcfd0jget800(item.name)">{{item.name}}</li>
+</ul>
+</div>
+</div>
+</div>
+<style> #Callmbglab4w00 { overflow:visible;height:40px;border:none;display:flex;flex-direction:row;justify-content:flex-end;-js-display:flex;margin-bottom:30px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="Callmbglab4w00" control='div'><div id="Cfovqwy76xtc00" style="overflow:hidden;color:#666;width:90px;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:right;font-size:14px;line-height:48px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" v-if="complexExpression_fovqwy76xtc00()" control='text' title="">{{innerText_fovqwy76xtc00}}</div><div id="Ci20128vt3vk00" style="overflow:hidden;color:#666;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:center;font-size:14px;line-height:48px;margin-right:8px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{innerText_i20128vt3vk00}}</div><div id="C2xqne9ib9yy00" style="overflow:hidden;color:#666;width:90px;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:right;font-size:14px;line-height:48px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" v-if="complexExpression_2xqne9ib9yy00()" control='text' title="">{{innerText_2xqne9ib9yy00}}</div><div id="Ch5tuh6moh2w00" style="overflow:hidden;color:#666;border:none;font-family:SimSun;text-decoration:none;text-align:right;font-size:14px;line-height:48px;border-color:#000;box-sizing:border-box;box-sizing: border-box;" control='text' title="">{{innerText_h5tuh6moh2w00}}</div>
+</div>
+<style> #C2fp45x7ayj9c0 { overflow:visible;width:100%;border:none;display:flex;flex-direction:row;justify-content:flex-end;-js-display:flex;margin-bottom:48px;border-color:#e7d6c3;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C2fp45x7ayj9c0" v-if="false" control='div'><div id="C4c038qq61c200" style="overflow:hidden;color:#666;height:30px;width:80px;border-radius:5px;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:center;font-size:14px;line-height:30px;border-left-width:1px;border-right-width:1px;border-bottom-width:1px;border-top-width:1px;border-style:solid;border-color:#ccc;box-sizing:border-box;cursor:pointer;box-sizing: border-box;" control='text' @click="flow_method_4b2yudi6opw00({}, $event)" title="">{{innerText_4c038qq61c200}}</div>
+</div>
+</div>
+</div>
+<style> #C7uk8kx26iq400 { width:1000px;overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="C7uk8kx26iq400" control='div'>
+<style> #C61xm6dsz5o400 { width:100%;height:380px;overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="C61xm6dsz5o400" control='div'>
+<div id="Cco5ztcmsnxc00" style="width:100%;border:none;box-sizing:border-box;border-color:#000;box-sizing: border-box;">
+<div id="Cuk1dzhc3n8g0" class="iframe_wrap_uk1dzhc3n8g0" style="width:100%;height:380px;color:#111;border:none;box-sizing:border-box;border-color:#ddd;line-height:40px;font-size:14px;text-align:left;box-sizing: border-box;">
+<iframe src="https://www.xuexi.cn/bf91e45e407c7e931efbdb679917475b/0f000c993ac1e7b7615c2d0c647aa455.html" scrolling="no" frameborder="0" style="width:  100%; height:  100%;"></iframe>
+</div>
+</div>
+</div>
+</div>
+<style> #C11r4vr411tu80 { width:1000px;overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="C11r4vr411tu80" control='div'>
+<div id="C11l1lnbcvxmo" style="width:100%;border:none;border-color:#000;box-sizing:border-box;box-sizing: border-box;">
+<style> #Cen05onrr1ts00 { width:100%;overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="Cen05onrr1ts00" control='div'>
+<style> #Caqmiq8w5e8800 { width:1000px;height:400px;overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="Caqmiq8w5e8800" control='div'>
+<div id="C40civ6enros00" class="iframe_wrap_40civ6enros00" style="width:100%;height:400px;color:#111;border:none;box-sizing:border-box;border-color:#ddd;line-height:40px;font-size:14px;text-align:left;box-sizing: border-box;">
+<iframe src="https://www.xuexi.cn/4063dbabf4bad826aeeb5d831ce9624e/60bd1d03c55149fd0e92da70d074d72b.html" scrolling="no" frameborder="0" style="width:  100%; height:  100%;"></iframe>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="page">
+<style> #Cbo3g25sqouo00 { width:90px;top:010px;overflow:visible;border:none;right:0;position:fixed;display:flex;flex-direction:column;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="Cbo3g25sqouo00" control='div'>
+<div id="C8p3p53cmdv800" style="border:none;border-color:#000;box-sizing:border-box;box-sizing: border-box;">
+</div>
+</div><style>
+.dyxx-rich-content p{
+  font-size: 18px;
+  font-family: Microsoft Yahei, 微软雅黑;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 0px;
+  font-variant-east-asian: normal;
+  font-stretch: normal;
+  line-height: 32.4px;
+  white-space: normal;
+  text-indent: 2em;
+  text-align: left;
+  color: black;
+}
+#Ca7vum16j2kg00{
+display: none;
+}
+
+</style><div id="C9o70ohogykg00" style="overflow:hidden;color:#666;top:4910px;left:200px;border:none;font-family:Microsoft Yahei, 微软雅黑;text-decoration:none;text-align:left;font-size:14px;line-height:30px;border-color:#000;box-sizing:border-box;position:absolute;box-sizing: border-box;" v-if="false" control='text' title="">{{innerText_9o70ohogykg00}}</div><div id="Cc89p7gremqg00" style="overflow:hidden;color:#111;top:349px;left:-617px;height:44px;width:100px;text-decoration:none;text-align:left;font-size:14px;line-height:40px;border-left-width:6px;padding-left:10px;border-style:solid;border-color:#5a7aff;box-sizing:border-box;background-color:#fff;position:absolute;box-sizing: border-box;" v-if="false" control='text' title="">{{innerText_c89p7gremqg00}}</div><div id="C5jsc1r8wjgg00" style="overflow:hidden;color:#111;top:304px;left:-618px;height:40px;width:100px;text-decoration:none;text-align:left;font-size:14px;line-height:40px;border-left-width:6px;padding-left:10px;border-style:solid;border-color:#5a7aff;box-sizing:border-box;background-color:#fff;position:absolute;box-sizing: border-box;" v-if="false" control='text' title="">{{innerText_5jsc1r8wjgg00}}</div><div id="Cifmtfw5y46800" style="width:100px;height:40px;left:-618px;top:401px;color:#111;overflow:hidden;background-color:#fff;box-sizing:border-box;border-color:#5a7aff;border-style:solid;padding-left:10px;border-left-width:6px;line-height:40px;font-size:14px;text-align:left;text-decoration:none;position:absolute;box-sizing: border-box;" v-if="false" control='text' title="">{{innerText_ifmtfw5y46800}}</div><div id="C3ngta0dk11600" style="width:100px;height:40px;left:-616px;top:447px;color:#111;overflow:hidden;background-color:#fff;box-sizing:border-box;border-color:#5a7aff;border-style:solid;padding-left:10px;border-left-width:6px;line-height:40px;font-size:14px;text-align:left;text-decoration:none;position:absolute;box-sizing: border-box;" v-if="false" control='text' title="">{{innerText_3ngta0dk11600}}</div><div id="Cgsgrn7buc9c00" style="width:100px;height:40px;left:-362px;top:564px;color:#111;overflow:hidden;border:none;background-color:#fff;box-sizing:border-box;border-color:#000;line-height:40px;font-size:14px;text-align:left;text-decoration:none;position:absolute;box-sizing: border-box;" v-if="false" control='text' title="">{{innerText_gsgrn7buc9c00}}</div>
+</div>
+</div>
+<div class="footer">
+<div class="footer-screen">
+</div>
+<div class="footer-page">
+</div>
+</div>
+<script src="https://source.xuexi.cn/script/page.min.js?v=1552061694"></script>
+<script src="https://source.xuexi.cn/script/jquery-ui/page.min.js?v=1552061694"></script>
+<script src="https://source.xuexi.cn/script/de/prismplayer/2.8.1/aliplayer-h5-min.js"></script>
+<script src="https://source.xuexi.cn/script/libs/page.min.js?v=1552061694"></script>
+<script src="https://source.xuexi.cn/script/verify/js/verify.min.js"></script>
+<script src="https://source.xuexi.cn/script/laydate/laydate.js"></script>
+<script src="./datae43e220633a65f9b6d8b53712cba9caa.js"></script>
+<script src="./e43e220633a65f9b6d8b53712cba9caa.js"></script>
+</body>
+<div class="image-shadow"> <div class="image-container"> </div> </div>
+<script>
+  $(".image-shadow").click(function () {
+    $(this).hide();
+  })
+</script>
+<div id="gallery_global" style="display:none"></div>
+</html>

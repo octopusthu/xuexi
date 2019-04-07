@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="lang=zh-cmn-Hans">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+<meta name="description" content="“学习强国”学习平台由中宣部主管，以深入学习宣传习近平新时代中国特色社会主义思想为主要内容，建立纵向到底、横向到边学习网络，实现有组织、有指导、有管理、有服务学习，打造集大成创新学习生态。">
+<title>article</title>
+<link rel="stylesheet" href="https://source.xuexi.cn/css/page.min.css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="https://source.xuexi.cn/script/verify/css/verify.css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="https://source.xuexi.cn/css/common.css" media="screen" title="no title" charset="utf-8">
+<script src="https://source.xuexi.cn/vue/1.0.28/vue.min.js"></script>
+<script src="https://source.xuexi.cn/script/json3.min.js"></script>
+<script src="https://source.xuexi.cn/script/libs.js?v=1552061699"></script>
+<script src="https://source.xuexi.cn/script/jquery/2.2.4/jquery.min.js"></script>
+<script>
+    if (lessIE9()) {
+      location.href = '/update';
+    }
+  </script>
+<!--[if IE 9]>
+    <style> 
+    select { background: url("https://source.xuexi.cn/images/arrow.png") no-repeat scroll right 15px center transparent !important; } 
+    #modal { display: none !important; }
+    </style>
+  <![endif]-->
+<style>
+    * {
+        text-decoration: none;
+        padding: 0;
+        border-width: 0;
+        margin: 0;
+        border-collapse: collapse;
+      }
+    html,
+    body {
+      height: 100%;
+      text-align: center;
+      background: #fff;
+    }
+    body>* {
+      text-align: left;
+    }
+    [v-cloak] {
+      visibility: hidden;
+    }
+    #popup{
+       position:fixed; 
+       width: 100%;
+       height: 100%; 
+       top: 0;
+       right:0;
+       background: #cccccc;
+       z-index:100000;
+       display:none
+    }
+    #canvas{
+       width:140px;
+       height:140px;
+       display:none;
+    }
+    #popup img{
+       background:#ffffff;
+       width:40px;
+       border-radius:25px;
+       margin: 30px 30px;
+    }
+    #popup-ch{
+       position: absolute;
+       left: 50%;
+       top: 50%;
+       transform: translate(-50%,-50%);
+       background:#FFFFFF;
+       width:100px;
+       height:100px;
+    }
+    #app {
+      min-width: 1250px;
+    }
+    #modal {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10000;
+      display: none;
+    }
+    #alertBox {
+      position: fixed;
+      width: 350px;
+      height: 200px;
+      background: rgb(255, 255, 255);
+      border: 1px solid rgb(242, 243, 243);
+      left: 50%;
+      top: 40%;
+      border-radius: 10px;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      box-shadow: rgba(125, 114, 114, 0.5) 0px 5px 15px;
+    }
+    #title {
+      text-align: center;
+      line-height: 50px;
+      padding-left: 20px;
+      height: 50px;
+      font-size: 18px;
+      color: rgb(61, 139, 255);
+      border-bottom: 1px solid rgb(242, 243, 243);
+    }
+    #close {
+      width: 25px;
+      height: 25px;
+      margin-top: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+      float: right;
+    }
+    .global-image {
+      cursor: pointer;
+    }
+    #content {
+      margin: 30px 40px 20px;
+      font-size: 14px;
+      color: rgb(128, 128, 128);
+      height: 40px;
+      overflow: hidden;
+    }
+    #certain {
+      position: relative;
+    }
+    #btn {
+      height: 36px;
+      background: rgb(61, 139, 255);
+      border-radius: 18px;
+      width: 120px;
+      font-size: 13px;
+      cursor: pointer;
+      color: rgb(255, 255, 255);
+      bottom: 40px;
+      outline: none;
+    }
+    #certain :active {
+      border: 3px solid #0f65ff;
+    }
+    .header {
+      height: 460px;
+      position: relative;
+    }
+    .header-screen {
+      width: 100%;
+      
+    }
+    .header-page {
+      position: relative;
+      width: 900px;
+      margin: 0 auto;
+      
+    }
+    .content {
+      position: relative;
+      min-height: 900px;
+       
+      
+      z-index: 0;
+    }
+    .page {
+      position: relative;
+      width: 900px;
+      margin: 0 auto;
+      
+    }
+    .screen {
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      
+    }
+    .footer {
+      position: relative;
+      height: 0px;
+    }
+    .footer-screen {
+      width: 100%;
+      
+    }
+    .footer-page {
+      position: relative;
+      width: 900px;
+      margin: 0 auto;
+      
+    }
+    .image-shadow { 
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      top: 0;
+      bottom: 0;
+      z-index: 1000;
+      display:none;
+    }
+    .image-shadow .image-container { 
+      width: 90%;
+      height: 90%;
+      margin: 2% auto;
+      background-position: center center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+    
+  </style>
+</head>
+<input id="csrf_token" type="hidden" value="1m47levnnxc">
+<script>
+  var csrf_token = "1m47levnnxc";
+  localStorage.setItem('csrf_token', csrf_token);
+  localStorage.setItem('oauth', "oauth");
+</script>
+<body id="app" v-cloak style="width:100%;height:100%">
+<div style="display:none">“学习强国”学习平台由中宣部主管，以深入学习宣传习近平新时代中国特色社会主义思想为主要内容，建立纵向到底、横向到边学习网络，实现有组织、有指导、有管理、有服务学习，打造集大成创新学习生态。</div>
+<div id="modal">
+<div id="alertBox">
+<div id="title">
+学习强国
+<img src="https://source.xuexi.cn/images/ios-close-outline.png" id="close" onclick="closeFunc()">
+</div>
+<div id="content"></div>
+<div id="certain">
+<input id="btn" type="button" value="确 定" onclick="certainFunc()">
+</div>
+</div>
+</div>
+<div id="popup">
+<div id="popup-ch">
+<canvas id="canvas"></canvas>
+<img src="https://source.xuexi.cn/images/loading.gif">
+</div>
+</div>
+<div class="header">
+<div class="header-screen">
+<div id="Cdcw8v5jwzdc00" class="iframe_wrap_dcw8v5jwzdc00" style="width:100%;height:460px;left:0;top:0px;color:#111;border:none;box-sizing:border-box;border-color:#ddd;line-height:40px;font-size:14px;text-align:left;position:absolute;box-sizing: border-box;">
+<iframe sanbox="allow-scripts allow-top-navigation" src="https://www.xuexi.cn/b0b2a39e854d4612c6858aea76861d98/648fafc83297345be269377aefc53c9e.html" scrolling="no" frameborder="0" style="width:  100%; height:  100%;"></iframe>
+</div>
+</div>
+<div class="header-page">
+<style>
+
+.word-item:hover {
+    color: #d30000 !important;
+  }
+  
+    #Cdcw8v5jwzdc00{
+    overflow: hidden;
+  }
+
+</style>
+</div>
+</div>
+<div class="content">
+<div class="screen">
+<style> #C9djoy7fjv7400 { overflow:visible;top:0px;left:0;width:100%;border:none;display:flex;flex-direction:column;align-items:center;-js-display:flex;border-color:#000;box-sizing:border-box;position:absolute;box-sizing: border-box; } </style>
+<div id="C9djoy7fjv7400" control='div'>
+<style> #C8lmbjus1vz400 { width:1000px;overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;margin-top:20px;margin-bottom:20px;box-sizing: border-box; } </style>
+<div id="C8lmbjus1vz400" control='div'><div id="Ce9ob5plx7u800" style="color:#666666;overflow:hidden;border:none;box-sizing:border-box;border-color:#000;line-height:20px;font-size:14px;text-align:left;text-decoration:none;cursor:pointer;box-sizing: border-box;" control='text' @click="click_e9ob5plx7u800" title="">{{innerText_e9ob5plx7u800}}</div><div id="Cihe8tk61h7c00" style="color:#666666;overflow:hidden;border:none;box-sizing:border-box;border-color:#000;margin-right:5px;margin-left:5px;line-height:20px;font-size:14px;text-align:left;text-decoration:none;box-sizing: border-box;" control='text' title="">{{innerText_ihe8tk61h7c00}}</div><div id="C373r31v5wsw00" style="color:#666666;overflow:hidden;border:none;box-sizing:border-box;border-color:#000;line-height:20px;font-size:14px;text-align:left;text-decoration:none;box-sizing: border-box;" control='text' title="">{{innerText_373r31v5wsw00}}</div>
+</div>
+<style> #Caepwflu1h6800 { width:1000px;overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;margin-bottom:30px;box-sizing: border-box; } </style>
+<div id="Caepwflu1h6800" control='div'>
+<style> #Ced5lslw30ig00 { width:664px;overflow:visible;border:none;display:flex;flex-direction:column;z-index:200;-js-display:flex;box-sizing:border-box;border-color:#d30000;margin-right:20px;box-sizing: border-box; } </style>
+<div id="Ced5lslw30ig00" control='div'>
+<style> #Cejp1kqovz4w00 { width:660px;overflow:visible;display:flex;align-items:flex-end;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#d30000;border-style:solid;padding-bottom:20px;margin-bottom:30px;border-bottom-width:1px;box-sizing: border-box; } </style>
+<div id="Cejp1kqovz4w00" control='div'><div id="Ckur830j6bsw00" style="color:#d30000;overflow:hidden;box-sizing:border-box;border-color:#d30000;border-style:solid;padding-right:5px;padding-left:5px;margin-right:5px;border-left-width:6px;line-height:30px;font-weight:800;font-size:28px;text-align:left;text-decoration:none;font-family:Microsoft Yahei, 微软雅黑;box-sizing: border-box;" control='text' title="">{{innerText_kur830j6bsw00}}</div>
+<style> #Ci095deqar3400 { overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="Ci095deqar3400" control='div'>
+</div>
+</div>
+<style> #C3k404eh37gq00 { width:660px;overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="C3k404eh37gq00" control='div'>
+<div id="Chj9orckh95s00" style="width:100%;">
+<div style="position: relative;overflow: hidden;min-height:30px;margin-bottom:0px;" v-for="(i, item_hj9orckh95s00) of value_hj9orckh95s00">
+<style> #Ce26bryms22o00 { overflow:visible;width:100%;border:none;display:flex;flex-direction:row;-js-display:flex;margin-right:120px;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="Ce26bryms22o00" control='div'>
+<style> #C9vbojkfmu8w00 { overflow:hidden;border:none;display:flex;flex-direction:row;flex:6;flex-grow:6;flex-shrink:6;flex-basis:0;white-space:nowrap;text-overflow:ellipsis;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="C9vbojkfmu8w00" control='div'>
+<style> #C5oysc83w9ic00 { overflow:visible;width:100%;border:none;display:flex;flex-direction:row;-js-display:flex;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C5oysc83w9ic00" control='div'>
+<div id="Ca4gvo4bwg7400" class="word-item" style="overflow:hidden;color:#212121;width:100%;border:none;white-space:pre;text-overflow:ellipsis;text-decoration:none;text-align:left;font-size:14px;line-height:30px;margin-left:3px;border-color:#000;box-sizing:border-box;background-color:#fff;cursor:pointer;box-sizing: border-box;" v-html="item_hj9orckh95s00['frst_name']" control='text' @click="flow_method_fa66oxv5w4w0(item_hj9orckh95s00, $event)" title=""></div>
+</div>
+</div>
+<style> #C2eiuw8t8n0e80 { overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;flex:1;flex-grow:1;flex-shrink:1;flex-basis:0;-js-display:flex;border-color:#000;box-sizing:border-box;box-sizing: border-box; } </style>
+<div id="C2eiuw8t8n0e80" class="div_time " class='div_time' control='div'><div id="Ceqj4drwadtc00" class="word-item" style="overflow:hidden;color:#212121;height:30px;border:none;text-decoration:none;text-align:right;font-size:14px;line-height:30px;margin-left:3px;border-color:#000;box-sizing:border-box;background-color:#fff;cursor:pointer;box-sizing: border-box;" control='text' @click="flow_method_fa66oxv5w4w0(item_hj9orckh95s00, $event)" title="">{{interceptingFirstSpace_eqj4drwadtc00(item_hj9orckh95s00['original_time'])}}</div>
+</div>
+</div><style>
+  .div_time{
+       display:none;
+  }
+</style>
+</div>
+<template v-if="showPageSet_hj9orckh95s00">
+<div @click="click_hj9orckh95s00()" style="text-align: center">
+<span v-if="loadMore_hj9orckh95s00 == 0">加载更多</span>
+<span v-if="loadMore_hj9orckh95s00 == 1">加载中...</span>
+</div>
+</template>
+</div>
+</div>
+<style> #C7gol6e7oed400 { width:100%;height:100px;overflow:visible;border:none;display:flex;align-items:center;flex-direction:row;justify-content:center;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="C7gol6e7oed400" v-if="complexExpression_7gol6e7oed400()" control='div'><div id="C55w2zdxqswk00" style="color:#111;overflow:hidden;border:none;background-color:#fff;box-sizing:border-box;border-color:#000;line-height:40px;font-size:30px;text-align:left;text-decoration:none;box-sizing: border-box;" control='text' title="">{{innerText_55w2zdxqswk00}}</div>
+</div>
+</div>
+<style> #Cjp5m498t76o00 { width:320px;height:603px;overflow:visible;border:none;display:flex;flex-direction:row;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="Cjp5m498t76o00" control='div'>
+<div id="C4ydd0jeud7g00" style="width:100%;border:none;box-sizing:border-box;border-color:#000;box-sizing: border-box;">
+<div id="C5fahapr9tj40" class="iframe_wrap_5fahapr9tj40" style="width:320px;height:638px;color:#111;border:none;z-index:200;box-sizing:border-box;border-color:#ddd;line-height:40px;font-size:14px;text-align:left;box-sizing: border-box;">
+<iframe src="https://www.xuexi.cn/4f5aa999a479568bf620109395d8fe56/69fe65d658afc891dd105e1ce9e5879d.html" scrolling="no" frameborder="0" style="width:  100%; height:  100%;"></iframe>
+</div>
+</div>
+</div>
+</div>
+<style> #C8m57xrd94y800 { width:1000px;overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;-js-display:flex;box-sizing:border-box;border-color:#000;margin-bottom:40px;box-sizing: border-box; } </style>
+<div id="C8m57xrd94y800" control='div'>
+<style>
+
+.pagination .current {
+    background: #ca1c1d;
+    color: #fff;
+    border: 1px solid #ca1c1d;
+}
+
+</style>
+<div id="Cbihw8wtupvk00" style="width:660px;height:35px;color:#111;box-sizing:border-box;border-color:#D3D4D5;border-style:solid;line-height:50px;text-align:center;border-width:1;font-size:14px;cursor:pointer;box-sizing: border-box;" control='pagination'>
+<div>
+<ul class="pagination">
+<li class="{{item.status}}" v-for="item in list_bihw8wtupvk00" @click="page_action_bihw8wtupvk00(item.name)">{{item.name}}</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="C56pakso7dlk00" style="width:100%;border:none;box-sizing:border-box;border-color:#000;box-sizing: border-box;">
+<style> #Cen05onrr1ts00 { width:100%;overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="Cen05onrr1ts00" control='div'>
+<style> #Caqmiq8w5e8800 { width:1000px;height:400px;overflow:visible;border:none;display:flex;flex-direction:row;justify-content:center;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="Caqmiq8w5e8800" control='div'>
+<div id="C40civ6enros00" class="iframe_wrap_40civ6enros00" style="width:100%;height:400px;color:#111;border:none;box-sizing:border-box;border-color:#ddd;line-height:40px;font-size:14px;text-align:left;box-sizing: border-box;">
+<iframe src="https://www.xuexi.cn/4063dbabf4bad826aeeb5d831ce9624e/60bd1d03c55149fd0e92da70d074d72b.html" scrolling="no" frameborder="0" style="width:  100%; height:  100%;"></iframe>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="page">
+<style> #Cckczr4b7ywg00 { width:90px;top:010px;overflow:visible;border:none;right:0;position:fixed;display:flex;flex-direction:column;-js-display:flex;box-sizing:border-box;border-color:#000;box-sizing: border-box; } </style>
+<div id="Cckczr4b7ywg00" control='div'>
+<div id="Ccp82fmrpenk00" style="border:none;border-color:#000;box-sizing:border-box;box-sizing: border-box;">
+</div>
+</div><div id="C2j80w85mmc800" style="width:140px;height:40px;left:-631px;top:189px;color:gray;overflow:hidden;background-color:#fff;box-sizing:border-box;border-color:gray;border-style:solid;border-top-width:1px;border-bottom-width:1px;border-right-width:1px;border-left-width:1px;line-height:40px;font-size:14px;text-align:center;text-decoration:none;position:absolute;box-sizing: border-box;" v-if="false" control='text' title="">{{innerText_2j80w85mmc800}}</div><div id="C8o6pnzq6y2000" style="width:100px;height:40px;left:-352px;top:169px;color:#111;overflow:hidden;background-color:#fff;box-sizing:border-box;border-color:#5a7aff;border-style:solid;padding-left:10px;border-left-width:6px;line-height:40px;font-size:14px;text-align:left;text-decoration:none;position:absolute;box-sizing: border-box;" v-if="false" control='text' title="">{{innerText_8o6pnzq6y2000}}</div>
+</div>
+</div>
+<div class="footer">
+<div class="footer-screen">
+</div>
+<div class="footer-page">
+</div>
+</div>
+<script src="https://source.xuexi.cn/script/page.min.js?v=1552061699"></script>
+<script src="https://source.xuexi.cn/script/jquery-ui/page.min.js?v=1552061699"></script>
+<script src="https://source.xuexi.cn/script/libs/page.min.js?v=1552061699"></script>
+<script src="https://source.xuexi.cn/script/verify/js/verify.min.js"></script>
+<script src="https://source.xuexi.cn/script/laydate/laydate.js"></script>
+<script src="./data9a3668c13f6e303932b5e0e100fc248b.js"></script>
+<script src="./9a3668c13f6e303932b5e0e100fc248b.js"></script>
+</body>
+<div class="image-shadow"> <div class="image-container"> </div> </div>
+<script>
+  $(".image-shadow").click(function () {
+    $(this).hide();
+  })
+</script>
+<div id="gallery_global" style="display:none"></div>
+</html>
