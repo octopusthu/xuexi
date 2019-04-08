@@ -171,7 +171,7 @@ function parseArticleDetail(jsFileContent) {
 
 function parseFromStringArray(str) {
   let arr = JSON.parse(str);
-  if (arr && arr[0]) { return arr[0]; }
+  if (arr && arr[0]) { return arr[0].trim(); }
   return null;
 }
 
